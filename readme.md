@@ -1,13 +1,12 @@
 # Assignment 02: Parable Of The Polygons
 please turn in by 11pm on 2016-02-27
 
-- This project is based on a "playable post" by Vi Hart and Nicky Case called
-  the [Parable of the Polygons](http://ncase.me/polygons/), illustrating the
-  effects of bias on population segregation.
+This project is based on a "playable post" by Vi Hart and Nicky Case called the
+[Parable of the Polygons](http://ncase.me/polygons/), illustrating the effects
+of bias on population segregation.
 
-- The goal of this project is to get some practice with multiple file projects,
-  pointers, and (above all) beginning to intermediate level classes.
-
+The goal of this project is to get some practice with multiple file projects,
+pointers, and (above all) beginning to intermediate level classes.
 
 **This project may take a lot of time.  Please plan accordingly.  Also, this
 project may contain wording you are not yet used to.  Please be patient while
@@ -91,12 +90,14 @@ without being fully implemented.
 
 Fill in the `TODO`s (to-do's) in
 [neighborhood.cpp](partial-solution/neighborhood.cpp)
+and any remaining `TODO`s in
+[buffer.cpp](partial-solution/buffer.cpp), and
+[shape.cpp](partial-solution/shape.cpp)
 so that the code
 ```c++
 // animate  neighborhood
 unsigned int size_x = TERM_SIZE_X/Shape::size_x;
 unsigned int size_y = TERM_SIZE_Y/Shape::size_y;
-
 Neighborhood(size_x, size_y).animate(1000);
 ```
 in [main.cpp](partial-solution/main.cpp) runs and produces the output shown in
