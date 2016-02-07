@@ -2,7 +2,7 @@
 please turn in by 11pm on 2016-02-27
 
 - This project is based on a "playable post" by Vi Hart and Nicky Case called
-  the [Parable of the Polygons](http://ncase.me/polygons/), illustrating the
+  [Parable of the Polygons](http://ncase.me/polygons/), illustrating the
   effects of bias on population segregation.
 
 - The goal of this project is to get some practice with multiple file projects,
@@ -87,12 +87,12 @@ Any functions that are not necessary for these tests to run may be "stubbed
 out" -- that is, filled in just enough for the program to compile and run,
 without being fully implemented.
 
-### Week 2
+### Weeks 2 and 3
 
 Fill in the `TODO`s (to-do's) in
 [neighborhood.cpp](partial-solution/neighborhood.cpp),
-and any remaining `TODO`s in
-[buffer.cpp](partial-solution/buffer.cpp), and
+and any remaining uncompleted code in
+[buffer.cpp](partial-solution/buffer.cpp) and
 [shape.cpp](partial-solution/shape.cpp),
 so that the code
 ```c++
@@ -104,22 +104,18 @@ Neighborhood(size_x, size_y).animate(1000);
 in [main.cpp](partial-solution/main.cpp) runs and produces the output shown in
 [demo.mp4](demo.mp4).
 
-### Week 3
-
-#### If you were able to finish
-Rewrite the project from scratch, referencing your solution (or mine, if you
-wish) as little as possible (but as much as you need to).
-
-#### If you were not able to finish
-Reference my solution (or another student's) and complete the first version of
-your own.  Please do your very best to understand everything that's going on.
-
 
 ## Requests
 
 - Please try to do this in groups, and try to use Google, etc., only for
   answers to questions about the language (as opposed to questions about this
   problem).
+
+- If you have time, you might want to rewrite your solution from scratch,
+  referencing your first solution (or mine, if you wish) as little as possible
+  (but as much as necessary).  I would recommend doing this not only if you
+  have time before the next assignment, but also if you're able to complete the
+  next assignment early.
 
 
 ## Assumptions
