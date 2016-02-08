@@ -4,27 +4,6 @@ A program illustrating the effects of bias on population segregation.  Based on
 the "playable post" by Vi Hart and Nicky Case: <http://ncase.me/polygons/>.
 
 
-## TODO
-
-- multiple file projects
-- pointers
-  - cdecl
-- macros
-- ADT
-  - structs
-  - classes
-    - access specifiers
-    - ctor/dtor
-    - const correctness
-    - this
-    - static
-    - initializer lists
-    -- friends
-    -- polymorphism
-- OO dev
-- passing objects to functions
-
-
 ## References
 
 - [`rand()` considered harmful]
