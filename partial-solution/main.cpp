@@ -30,7 +30,7 @@ void test_buffer() {
             if ( (x-40)*(x-40) + (y-10)*(y-10) == 50)
                 b.set(x, y, '*');
 
-    // draw boarder
+    // draw border
     for (int y=0; y < b.size_y; y++) {
         b.set(0, y, '|');
         b.set(b.size_x-1, y, '|');
