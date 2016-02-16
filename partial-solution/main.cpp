@@ -10,6 +10,7 @@
  * - We also include our test functions here, since there aren't that many.
  */
 
+#include "buffer.h"
 #include "constants.h"
 #include "neighborhood.h"
 #include "shape.h"
