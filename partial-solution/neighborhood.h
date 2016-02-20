@@ -146,6 +146,22 @@ class Neighborhood {
          * the `Neighborhood` should be drawn to position
          * ( `x * Shape::size_x`, `y * Shape::size_y` )
          * in the `Buffer`.
+         *
+         * Finally, remember that inside every member function we have access
+         * to the `this` pointer, which is a pointer to the current instance of
+         * the class that the member function belongs to, and is operating on.
+         * Recall our typical example of using pointers:
+         * ```
+         * int i = 5;
+         * int * p = &i;
+         * *p = 7;
+         * cout << i << " " << *p << endl;
+         * ```
+         * Note that the type of `p` is "pointer to int", and the type of `*p`
+         * is "int".  Thus, if we have a pointer called `this` with type
+         * "pointer to Neighborhood", `*this` will be of type "Neighborhood".
+         * This will be important when you're calling the `.isHappy()` method,
+         * which expects a `Neighborhood` as the first argument.
          */
 };
 
