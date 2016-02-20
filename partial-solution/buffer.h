@@ -126,7 +126,7 @@ class Buffer {
          *   characters where they don't belong.
          * - This function will be useful when implementing the `Shape` class.
          * - If you can't think of a way to do this, see
-         *   `hint--implementation-of-Buffer-set.md`.
+         *   `solution---Buffer-set.md`.
          */
 
 

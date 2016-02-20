@@ -133,6 +133,17 @@ class Neighborhood {
          * ```
          * std::this_thread::sleep_for(std::chrono::milliseconds(100));
          * ```
+         *
+         * Remember that the `Buffer` created in step (1) needs to be large
+         * enough to hold all the shapes -- i.e. its dimensions should be
+         * `size_x * Shape::size_x` by `size_y * Shape::size_y`.
+         *
+         * Also remember to account for this difference between the
+         * `Neighborhood` size and the `Buffer` size when having the shapes
+         * draw themselves to the buffer.  A `Shape` at position (x, y) in the
+         * `Neighborhood` should be drawn to position
+         * `( x * Shape::size_x, y * Shape::size_y )`
+         * in the `Buffer`.
          */
 };
 
