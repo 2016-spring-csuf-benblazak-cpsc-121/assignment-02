@@ -15,5 +15,5 @@
 
 // ----------------------------------------------------------------------------
 
-// TODO: implementations for all functions in `class Buffer`
+// TODO: implementations for all functions in `class Shape`
 
