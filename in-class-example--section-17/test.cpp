@@ -31,7 +31,7 @@ class Buffer {
         Buffer(int sizex, int sizey) : sizex(sizex), sizey(sizey) {
             data = new char[sizex * sizey];
 
-            for (int y = 0; y < sizex; y++) {
+            for (int y = 0; y < sizey; y++) {
                 for (int x = 0; x < sizex; x++) {
                     data[ y * sizex + x ] = ' ';
                 }
