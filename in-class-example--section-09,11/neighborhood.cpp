@@ -144,8 +144,8 @@ void Neighborhood::move(unsigned int old_x, unsigned int old_y) {
         if ( get(x,y).getType() != "empty" )
             continue;
 
-        neighborhood_[y * size_x + y].setType( get(old_x, old_y).getType() );
-        neighborhood_[old_y * size_x + old_y].setType("empty");
+        neighborhood_[y * size_x + x].setType( get(old_x, old_y).getType() );
+        neighborhood_[old_y * size_x + old_x].setType("empty");
 
         break;
     }
