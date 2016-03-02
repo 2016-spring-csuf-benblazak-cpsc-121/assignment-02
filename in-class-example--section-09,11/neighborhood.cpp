@@ -8,9 +8,13 @@
  */
 
 #include <random>
+#include <chrono>
+#include <thread>
 // TODO: `#include`s for other system headers, if necessary
 
 #include "neighborhood.h"
+
+#include "constants.h"
 
 // TODO: `#include`s for other local headers, if necessary
 
@@ -56,5 +60,171 @@ namespace {
 
 // ----------------------------------------------------------------------------
 
-// TODO: implementations for all functions in `class Neighborhood`
+Neighborhood::Neighborhood(unsigned int size_x, unsigned int size_y) 
+    : size_x(size_x), size_y(size_y)
+{
+    neighborhood_ = new Shape[size_x * size_y]();
+
+    unsigned int counter = 0;
+    while ( counter / double(size_x * size_y) < RATIO_FILLED ) {
+        unsigned int x = mtrand(0, size_x-1);
+        unsigned int y = mtrand(0, size_y-1);
+
+        if ( get(x,y).getType() != "empty" )
+            continue;
+
+        if (mtrand(0,1) == 0)
+            neighborhood_[y * size_x + x].setType("triangle");
+        else
+            neighborhood_[y * size_x + x].setType("square");
+
+        counter++;
+    }
+}
+/**
+ * The constructor.
+ *
+ * Must initialize `size_x` and `size_y`.
+ *
+ * Must also allocate memory for `neighborhood_`, initialize it to
+ * contain all "empty" `Shape`s, and then fill it with non-empty shapes
+ * so that the ratio of non-empty to empty shapes is `RATIO_FILLED`
+ * (from `constants.h`).
+ *
+ * Notes:
+ * - Since `size_x` and `size_y` are constant, they must be initialized
+ *   in the initialization list, rather than set in the constructor
+ *   body.
+ * - You may assume that the dynamic memory allocation succeeds.
+ */
+
+Neighborhood::~Neighborhood() {
+    delete[] neighborhood_;
+}
+/**
+ * The destructor.
+ *
+ * Must free the memory that the constructor allocated to
+ * `neighborhood_`.
+ */
+
+
+Shape Neighborhood::get(unsigned int x, unsigned int y) const {
+    return neighborhood_[ y * size_x + x ];
+}
+/**
+ * Return the `Shape` at `neighborhood_[ y * size_x + x ]`.
+ *
+ * If `x` or `y` is out of bounds, should write
+ * ```
+ * "ERROR: `Neighborhood::get`: index out of bounds\n"
+ * ```
+ * to `cerr` and `exit(1)`.
+ */
+
+void Neighborhood::set(unsigned int x, unsigned int y, const Shape & s) {
+    neighborhood_[ y * size_x + x ] = s;
+}
+/**
+ * Set the `Shape` at `neighborhood_[ y * size_x + x ]` to `s`.
+ *
+ * If `x` or `y` is out of bounds, should write
+ * ```
+ * "ERROR: `Neighborhood::set`: index out of bounds\n"
+ * ```
+ * to `cerr` and `exit(1)`.
+ */
+
+
+void Neighborhood::move(unsigned int old_x, unsigned int old_y) {
+    for(;;) {
+        unsigned int x = mtrand(0, size_x-1);
+        unsigned int y = mtrand(0, size_y-1);
+
+        if ( get(x,y).getType() != "empty" )
+            continue;
+
+        neighborhood_[y * size_x + y].setType( get(old_x, old_y).getType() );
+        neighborhood_[old_y * size_x + old_y].setType("empty");
+
+        break;
+    }
+}
+/**
+ * Move the shape at index `old_x, old_y` to a random empty location in
+ * the neighborhood.
+ */
+
+
+void Neighborhood::animate(unsigned int frames) {
+    // step 1
+    Buffer b(size_x*Shape::size_x, size_y*Shape::size_y);
+
+    for(int i = 0; i < frames; i++) {
+        // step 2
+        for(unsigned int y = 0; y < size_y; y++) {
+            for(unsigned int x = 0; x < size_x; x++) {
+                get(x,y).drawToBuffer(b, x*Shape::size_x, y*Shape::size_y);
+            }
+        }
+        b.draw();
+
+        // step 3
+        for(unsigned int y = 0; y < size_y; y++) {
+            for(unsigned int x = 0; x < size_x; x++) {
+                if (! get(x,y).isHappy(*this, x, y))
+                    move(x, y);
+            }
+        }
+
+        std::this_thread::sleep_for(std::chrono::milliseconds(100));
+    }
+}
+/**
+ * 1. Create a buffer.
+ * 2. Draw all the shapes in our neighborhood to it, and render it to
+ *    the screen.
+ * 3. Move all the unhappy shapes, and go back to step (2).
+ *
+ * Loop from step (3) to step (2) `frames` times; that is, the
+ * neighborhood should be rendered to the screen (i.e. output to the
+ * terminal) `frames` times.
+ *
+ * To make it so that each frame can be seen, you should have the
+ * program sleep for a little while (probably at least 100
+ * milliseconds) at the end of each loop.  To do this, include the
+ * `<chrono>` and `<thread>` headers, and use the following code:
+ * ```
+ * std::this_thread::sleep_for(std::chrono::milliseconds(100));
+ * ```
+ *
+ * Remember that the `Buffer` created in step (1) needs to be larger
+ * than the `Neighborhood`, in order to hold all the shapes, which are
+ * larger than one character high and one character wide.  Its
+ * dimensions should be
+ * `size_x * Shape::size_x` by `size_y * Shape::size_y`.
+ *
+ * Also remember to account for this difference between the
+ * `Neighborhood` size and the `Buffer` size when having the shapes
+ * draw themselves to the buffer.  A `Shape` at position (`x`, `y`) in
+ * the `Neighborhood` should be drawn to position
+ * ( `x * Shape::size_x`, `y * Shape::size_y` )
+ * in the `Buffer`.
+ *
+ * Finally, remember that inside every member function we have access
+ * to the `this` pointer, which is a pointer to the current instance of
+ * the class that the member function belongs to, and is operating on.
+ * Recall our typical example of using pointers:
+ * ```
+ * int i = 5;
+ * int * p = &i;
+ * *p = 7;
+ * cout << i << " " << *p << endl;
+ * ```
+ * Note that the type of `p` is "pointer to int", and the type of `*p`
+ * is "int".  Thus, if we have a pointer called `this` with type
+ * "pointer to Neighborhood", `*this` will be of type "Neighborhood".
+ * This will be important when you're calling the `.isHappy()` method,
+ * which expects a `Neighborhood` as the first argument.
+ */
 
